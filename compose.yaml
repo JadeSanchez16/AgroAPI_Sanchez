@@ -1,4 +1,17 @@
 services:
+  api:
+    build: .
+    environment:
+      DB_URL: jdbc:postgresql://postgres:5432/${POSTGRES_DB:-agrosierra}
+      DB_USER: ${POSTGRES_USER:-agrosierra}
+      DB_PASSWORD: ${POSTGRES_PASSWORD:-agrosierra_dev}
+      JWT_SECRET: ${JWT_SECRET:-AgroSierra-Desarrollo-Clave-Minimo-32-Bytes-2026}
+    ports:
+      - '${API_PORT:-8080}:8080'
+    depends_on:
+      postgres:
+        condition: service_healthy
+
   postgres:
     image: postgres:17-alpine
     environment:
