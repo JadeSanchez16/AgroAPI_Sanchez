@@ -34,6 +34,7 @@ Para desarrollo local con PostgreSQL ya disponible:
 | `tecnico1` | `Agro2026*` | `TECNICO` |
 | `jefe1` | `Agro2026*` | `JEFE_CAMPO` |
 | `admin` | `Agro2026*` | `ADMINISTRADOR` |
+| `supervisor1` | `Agro2026*` | `SUPERVISOR_CALIDAD` |
 
 La contraseña se almacena con BCrypt; el valor en claro existe únicamente como dato del examen.
 
@@ -58,6 +59,7 @@ por nombre de rol y permite incorporar roles nuevos.
 | TECNICO | LOTE_LEER, LABOR_LEER, LABOR_CREAR, LABOR_EDITAR sobre labores propias durante 24 horas |
 | JEFE_CAMPO | LOTE_LEER, LABOR_LEER, LABOR_CREAR, LABOR_EDITAR todas, LABOR_ELIMINAR, CAMPANIA_CERRAR |
 | ADMINISTRADOR | LOTE_LEER, LABOR_LEER, USUARIO_GESTIONAR |
+| SUPERVISOR_CALIDAD | LOTE_LEER, LABOR_LEER y LABOR_EDITAR sobre todas las labores; no puede cerrar campañas |
 
 Un token ausente, vencido o alterado produce `401`. Un usuario autenticado sin autoridad produce `403` sin
 cerrar su sesión.
