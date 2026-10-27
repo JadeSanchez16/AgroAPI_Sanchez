@@ -1,0 +1,72 @@
+{
+  "info": {
+    "name": "AgroAPI - Examen Parcial II",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {"key": "baseUrl", "value": "http://localhost:8080"},
+    {"key": "token", "value": ""},
+    {"key": "tokenAdmin", "value": ""}
+  ],
+  "item": [
+    {
+      "name": "Autenticación",
+      "item": [
+        {
+          "name": "Login técnico - 200",
+          "event": [{"listen": "test", "script": {"exec": ["pm.environment.set('token', pm.response.json().token);"]}}],
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": {"mode": "raw", "raw": "{\n  \"usuario\": \"tecnico1\",\n  \"contrasena\": \"Agro2026*\"\n}"},
+            "url": "{{baseUrl}}/api/v1/auth/login"
+          }
+        },
+        {
+          "name": "Credenciales incorrectas - 401",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": {"mode": "raw", "raw": "{\n  \"usuario\": \"tecnico1\",\n  \"contrasena\": \"incorrecta\"\n}"},
+            "url": "{{baseUrl}}/api/v1/auth/login"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Lotes y labores",
+      "item": [
+        {
+          "name": "Listar lotes paginados",
+          "request": {"method": "GET", "header": [{"key": "Authorization", "value": "Bearer {{token}}"}], "url": "{{baseUrl}}/api/v1/lotes?pagina=0&tamanio=20"}
+        },
+        {
+          "name": "Registrar labor - 201",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Authorization", "value": "Bearer {{token}}"}, {"key": "Content-Type", "value": "application/json"}],
+            "body": {"mode": "raw", "raw": "{\n  \"loteId\": 3,\n  \"tipo\": \"RIEGO\",\n  \"fecha\": \"2026-10-27\",\n  \"cantidad\": 10,\n  \"cantidadJornales\": 3,\n  \"observacion\": \"Registro desde Postman\"\n}"},
+            "url": "{{baseUrl}}/api/v1/labores"
+          }
+        },
+        {
+          "name": "Validación por campo - 400",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Authorization", "value": "Bearer {{token}}"}, {"key": "Content-Type", "value": "application/json"}],
+            "body": {"mode": "raw", "raw": "{\n  \"loteId\": 3,\n  \"tipo\": \"RIEGO\",\n  \"fecha\": \"2026-10-27\",\n  \"cantidad\": 0,\n  \"observacion\": \"\"\n}"},
+            "url": "{{baseUrl}}/api/v1/labores"
+          }
+        },
+        {
+          "name": "Sin token - 401",
+          "request": {"method": "GET", "url": "{{baseUrl}}/api/v1/lotes"}
+        },
+        {
+          "name": "Técnico intenta cerrar campaña - 403",
+          "request": {"method": "POST", "header": [{"key": "Authorization", "value": "Bearer {{token}}"}], "url": "{{baseUrl}}/api/v1/lotes/3/cerrar-campania"}
+        }
+      ]
+    }
+  ]
+}
