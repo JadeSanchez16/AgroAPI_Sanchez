@@ -38,9 +38,13 @@ class DatosSemilla(
         val admin = rol("ADMINISTRADOR", false, setOf(
             Privilegio.LOTE_LEER, Privilegio.LABOR_LEER, Privilegio.USUARIO_GESTIONAR,
         ))
+        val supervisorCalidad = rol("SUPERVISOR_CALIDAD", true, setOf(
+            Privilegio.LOTE_LEER, Privilegio.LABOR_LEER, Privilegio.LABOR_EDITAR,
+        ))
         val tecnicoUsuario = usuario("tecnico1", "Técnico de campo", tecnico)
         usuario("jefe1", "Jefe de campo", jefe)
         usuario("admin", "Administrador", admin)
+        usuario("supervisor1", "Supervisor de calidad", supervisorCalidad)
         if (lotes.count() == 0L) crearLotes()
         if (labores.count() == 0L) crearLabores(tecnicoUsuario)
     }
