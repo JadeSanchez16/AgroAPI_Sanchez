@@ -33,6 +33,8 @@ class Labor(
     var responsable: Usuario = Usuario(),
     @Column(nullable = false)
     var cantidad: Double = 0.0,
+    @Column(name = "cantidad_jornales", nullable = false)
+    var cantidadJornales: Int = 0,
     @Column(nullable = false, length = 500)
     var observacion: String = "",
     @Column(name = "creado_en", nullable = false, updatable = false)
