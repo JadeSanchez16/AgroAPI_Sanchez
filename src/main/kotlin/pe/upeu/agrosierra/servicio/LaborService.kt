@@ -46,6 +46,7 @@ class LaborService(
         return labores.save(Labor(
             lote = lote, tipo = requireNotNull(request.tipo), fecha = requireNotNull(request.fecha),
             responsable = usuario, cantidad = request.cantidad, observacion = requireNotNull(request.observacion).trim(),
+            cantidadJornales = request.cantidadJornales,
             creadoEn = Instant.now(clock),
         )).toResponse()
     }
@@ -64,6 +65,7 @@ class LaborService(
         labor.tipo = requireNotNull(request.tipo)
         labor.fecha = requireNotNull(request.fecha)
         labor.cantidad = request.cantidad
+        labor.cantidadJornales = request.cantidadJornales
         labor.observacion = requireNotNull(request.observacion).trim()
         return labores.save(labor).toResponse()
     }

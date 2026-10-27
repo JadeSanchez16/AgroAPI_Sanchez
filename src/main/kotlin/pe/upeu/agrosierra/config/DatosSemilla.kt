@@ -88,17 +88,20 @@ class DatosSemilla(
         todos.forEachIndexed { indice, lote ->
             laboresSemilla += Labor(lote = lote, tipo = TipoLabor.RIEGO,
                 fecha = LocalDate.now().minusDays((indice + 2).toLong()), responsable = tecnico,
-                cantidad = 10.0 + indice, observacion = "Riego programado", creadoEn = Instant.now().minusSeconds(172800))
+                cantidad = 10.0 + indice, cantidadJornales = 2 + (indice % 3),
+                observacion = "Riego programado", creadoEn = Instant.now().minusSeconds(172800))
             laboresSemilla += Labor(lote = lote, tipo = TipoLabor.FUMIGACION,
                 fecha = LocalDate.now().minusDays((indice + 1).toLong()), responsable = tecnico,
                 cantidad = lote.hectareas * lote.dosisMaximaPorHectarea * 0.5,
+                cantidadJornales = 1 + (indice % 2),
                 observacion = "Fumigación preventiva", creadoEn = Instant.now().minusSeconds(86400))
         }
         listOf(0, 1, 2, 4).forEach { indice ->
             val lote = todos[indice]
             laboresSemilla += Labor(lote = lote, tipo = TipoLabor.COSECHA,
                 fecha = LocalDate.now().minusDays(1), responsable = tecnico, cantidad = 100.0 + indice,
-                observacion = "Cosecha registrada", creadoEn = Instant.now().minusSeconds(3600))
+                cantidadJornales = 5 + indice, observacion = "Cosecha registrada",
+                creadoEn = Instant.now().minusSeconds(3600))
         }
         labores.saveAll(laboresSemilla)
     }
