@@ -45,7 +45,7 @@
           "request": {
             "method": "POST",
             "header": [{"key": "Authorization", "value": "Bearer {{token}}"}, {"key": "Content-Type", "value": "application/json"}],
-            "body": {"mode": "raw", "raw": "{\n  \"loteId\": 3,\n  \"tipo\": \"RIEGO\",\n  \"fecha\": \"2026-10-27\",\n  \"cantidad\": 10,\n  \"observacion\": \"Registro desde Postman\"\n}"},
+            "body": {"mode": "raw", "raw": "{\n  \"loteId\": 3,\n  \"tipo\": \"RIEGO\",\n  \"fecha\": \"2026-10-27\",\n  \"cantidad\": 10,\n  \"cantidadJornales\": 3,\n  \"observacion\": \"Registro desde Postman\"\n}"},
             "url": "{{baseUrl}}/api/v1/labores"
           }
         },

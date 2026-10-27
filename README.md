@@ -121,6 +121,7 @@ Las demás peticiones usan `Authorization: Bearer <token>`.
   "tipo": "RIEGO",
   "fecha": "2026-10-27",
   "cantidad": 12.5,
+  "cantidadJornales": 3,
   "observacion": "Riego de mantenimiento"
 }
 ```
@@ -133,6 +134,7 @@ Las demás peticiones usan `Authorization: Bearer <token>`.
   "fecha": "2026-10-27",
   "responsable": "tecnico1",
   "cantidad": 12.5,
+  "cantidadJornales": 3,
   "observacion": "Riego de mantenimiento",
   "creadoEn": "2026-10-27T15:00:00Z"
 }
